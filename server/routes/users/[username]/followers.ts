@@ -26,7 +26,7 @@ export default eventHandler(async ({ context }) => {
       }
     );
     const data = await resp.json();
-    return data;
+    return data.collection;
   } catch (error) {
     return new Response(
       JSON.stringify({ error: 503, message: "SoundCloud request error" }),

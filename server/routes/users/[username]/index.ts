@@ -25,10 +25,21 @@ export default eventHandler(async ({ context }) => {
       mode: "cors",
       credentials: "include",
     });
+
+    if (resp.status === 404)
+      return new Response(
+        JSON.stringify({ error: 404, message: "User not found" }),
+        {
+          status: 404,
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
     const html = await resp.text();
     const dom = new JSDOM(html);
 
-    let parsed = {};
     const data = JSON.parse(
       [...dom.window.document.querySelectorAll("script")]
         .map((x) => x.innerHTML)
@@ -36,9 +47,8 @@ export default eventHandler(async ({ context }) => {
         .replace("window.__sc_hydration = ", "")
         .replace(";", "")
     );
-    data.map((x) => (parsed[x.hydratable] = x.data));
 
-    return parsed;
+    return data.find((x) => x.hydratable === "user")?.data || null;
   } catch (error) {
     return new Response(
       JSON.stringify({ error: 503, message: "SoundCloud request error" }),
