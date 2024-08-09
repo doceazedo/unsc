@@ -7,6 +7,10 @@
     "preview": "node .output/server/index.mjs"
   },
   "devDependencies": {
+    "@types/jsdom": "^21.1.7",
     "nitropack": "latest"
+  },
+  "dependencies": {
+    "jsdom": "^24.1.1"
   }
 }
