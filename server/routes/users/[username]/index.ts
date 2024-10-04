@@ -6,18 +6,14 @@ export default eventHandler(async ({ context }) => {
   try {
     const resp = await fetch(`https://soundcloud.com/${username}`, {
       headers: {
-        accept:
-          "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7",
+        accept: "application/json, text/javascript, */*; q=0.01",
         "accept-language": "en-GB,en;q=0.9",
-        "cache-control": "no-cache",
-        pragma: "no-cache",
         "sec-ch-ua": '"Not_A Brand";v="8", "Chromium";v="120"',
         "sec-ch-ua-mobile": "?0",
         "sec-ch-ua-platform": '"macOS"',
         "sec-fetch-dest": "empty",
-        "sec-fetch-mode": "navigate",
-        "sec-fetch-site": "same-origin",
-        "upgrade-insecure-requests": "1",
+        "sec-fetch-mode": "cors",
+        "sec-fetch-site": "same-site",
       },
       referrerPolicy: "strict-origin-when-cross-origin",
       body: null,
